@@ -13,12 +13,19 @@ window.onload = () => {
       let copilotStatus = document.getElementById("copilotStatus");
       let fuel = document.getElementById("fuelStatus");
       let cargo = document.getElementById("cargoStatus");
+      class textField {
+         constructor(pilotName, copilotName, fuelLevel, cargoMass) {
+            this.pilotName = pilotName;
+            this.copilotName = copilotName;
+            this.fuelLevel = fuelLevel;
+            this.cargoMass = cargoMass;
+         }
+      }
 
       let validInput = document.querySelectorAll(".textField");
       let missingFields = [];
       for (let i=0; i < validInput.length; i++) {
          if (validInput[i].value === "") {
-            console.log(222);
             missingFields.push(validInput[i].name);
          } else if (["pilotName", "copilotName"].includes(event.target[i].name)){
             if (!isNaN(Number(validInput[i].value))) {
@@ -33,7 +40,6 @@ window.onload = () => {
       
       if (missingFields.length > 0) {
          alert(`All fields are required!\nMissing fields: ${JSON.stringify(missingFields)}`);
-         event.preventDefault();
          missingFields = [];
       } else {
          document.getElementById("faultyItems").style.visibility = "visible";
